@@ -1,0 +1,327 @@
+@charset "utf-8";
+* {margin:0; padding:0;
+box-sizing: border-box;}
+.cf::after { content:''; display: block; clear: both}
+img { max-width:100%; vertical-align: middle;}
+ul { list-style: none;}
+a { color:inherit; text-decoration: none;}
+.blind { 
+    position: absolute; width: 1px; height: 1px; 
+    overflow: hidden; text-indent: -9999px;
+    font-size: 0px; line-height: 0px;
+}
+/* span은 인라인요소 인라인은 높이넓이 못줘
+ 근데 포지션 앱솔루트주면 넓이높이 줄 수 있어
+ 글씨들 오버플로우돼 그래서 히든처리
+ text-indent 들여쓰기-9999px 주면 모니터 바깥으로 들여쓰기 처리 
+ */
+
+/* 헤더 스타일 시작 */
+#header { 
+    /* position:fixed와 positopn:absolute를 사용하면
+        블록요소의 기본값인 width:100%가 적용안됨 */
+    position: fixed; width: 100%; top:0; left:0;
+    background: #fff;
+    z-index: 2; 
+    padding: 0 40px; 
+    box-shadow: 0 1px 3px 0 rgba(0,0,0,0.3);   
+}
+/* 박스들이 겹쳤을 때 우선순위 position을 가진 애가 높아
+z-index와 상관없이 
+만약 조건이 같으면 순서가 나중에 코딩하는 애가 위로 올라와 */
+
+/* position: fixed 와 position:absolute 를 사용하면 
+블락 요소의 기본값인 width: 100%(=부모랑 같은 넓이)가 삭제됨
+항상 width 넣어줘야 해 브라우저랑 같은 넓이면 100%
+position: fixed; width: 100%; top:0; left:0; 꼭 같이★
+*/
+#header h1 { float:left; width:50px; margin-right:40px; margin-top: 20px; }
+#header #nav { float:right;
+     width:calc( 100% - 90px ); position:relative }
+
+/* calc(100% - 90px) : 마이너스 기호 앞 뒤에 한 칸씩 반드시 띄워쓸 것 */
+
+#header #nav .depth1 > li { display: inline-block; }
+#header #nav .depth1 > li:hover { color: #00754a; }
+#header #nav .depth1 > li > a { display: inline-block; 
+    padding: 40px 0; font-size: 14px; font-weight: bold; }
+#header #nav .depth1 > li+li > a { padding-left:24px }
+
+#header #nav .membership {
+    position: absolute; top: 50%; right:0; margin-top:-17px
+}
+#header #nav .membership a { font-size:14px; padding: 6px 16px 8px;
+    border:1px solid #000; border-radius: 50px; font-weight: bold; }
+
+#header #nav .membership a:first-child { margin-right:40px; border:none;
+    padding:7px 0; }
+#header #nav .membership a:first-child:hover { color:#00754a; }
+
+#header #nav .membership a:nth-child(2) { margin-right:16px; transition:all 0.5s; }
+#header #nav .membership a:nth-child(2):hover { background: rgba(0,0,0,0.06);}
+
+#header #nav .membership a:last-child { background: #000; color:#fff; transition:all 0.5s;}
+#header #nav .membership a:last-child:hover { background: rgba(0,0,0,0.7); }
+/* 헤더 스타일 끝 */
+
+/* 메인구역 스타일 시작 */
+#main { overflow: hidden; padding-top: 100px }
+#main .startorder {
+    position: fixed; 
+    bottom: 80px;
+    right: 50px;
+    z-index: 999;
+}
+#main .startorder a {
+    display: block;
+    padding: 18px 24px;
+    font-size: 19px;
+    background: #00a862;
+    color:#fff;
+    font-weight: bold;
+    border-radius: 50px;
+    box-shadow: 0 0 6px rgba(0,0,0,0.24), 0 8px 12px rgba(0,0,0,0.14);
+}
+#main .welcome-msg { 
+    position:fixed; 
+    width:40%; 
+    left:0;
+    height: 100%; 
+    background: #fff; 
+    box-shadow: 0 1px 1px rgba(0,0,0,.24),
+    0 4px 4px rgba(0,0,0,.12); 
+}  
+/* header 박스 밑이어서 top 값은 안 씀 
+fixed 쓰면 브라우저와 같은 높이 100% 씀 
+자리 차지를 안해 */
+
+#main .welcome-msg .text {
+    padding:0 131px; 
+    font-size: 28px;
+    font-weight: bold;
+    padding-top: 40vh;
+}
+   /* vh : viewpoint height 화면 높이기준 40%라는 뜻 */
+#main #container {
+    width:60%; 
+    margin-left:40%;
+    padding:20px 0 }
+    /* float이 형제들이 같은 줄로 정렬될때 쓰는 건데 
+    브라우저 기준 fixed 되는 거 써서 필요없어짐
+    넓이만 잡은 다음에 margin으로 해결해 
+    겹친 거니까 우측으로 빼내 */
+    /* welcome-msg랑 container가 header와 겹쳤어
+    header의 동생인 main 박스에 padding-top header 의 높이만큼 값주기  */
+    /* 패딩, 마진{상하 우좌} */
+#container .rewards { 
+    padding:0 40px; 
+}
+#container .rewards h2 { 
+    font-size: 14px; margin-bottom: 20px;
+}
+#container .rewards ul { overflow: hidden }
+#container .rewards li { float:left; width: 32.3333% }
+#container .rewards li:nth-child(2) { margin: 0 1.5% }
+/* margin은 % 계산해야돼 padding은 계산 안해도 되는데*/
+#container .rewards li img {
+    border-radius: 15px;
+}
+#container .rewards li img p {
+    font-size: 19px; padding-top:24px; }
+
+#container .btn { padding:24px 0 }
+#container .btn a { font-size:14px; padding: 6px 16px 8px;
+    border:1px solid #000; border-radius: 50px; font-weight: bold;
+    display:inline-block;
+}
+#container .btn a:nth-child(1) { 
+    background: #000; color: #fff;
+}
+#container .order { 
+    background: #f9f9f9; padding:40px 0 80px;
+}
+#container .order > div {
+    border-radius: 30px; 
+    background: #fff;
+    width: 500px;
+    margin:0 auto 20px;
+    overflow: hidden;
+    box-shadow: 0 0 0.5px 0 rgba(0,0,0,0.14), 0 1px 1px 0 rgba(0,0,0,0.24)
+}
+#container .order .order1 { 
+    padding: 20px 20px 20px
+}
+#container .order .order1 > div:first-child {
+    position:relative; padding-bottom:16px;
+}
+#container .order .order1 .answer { font-weight: bold; line-height:1.5em; font-size:28px;
+    width:80%; 
+}
+#container .order .order1 .beta { 
+    font-weight: bold; 
+    color:#dd92c0; 
+    font-size: 13px; letter-spacing:0.5em;
+    position:absolute; top:10px; right:0; 
+}
+#container .order .order1 > div:nth-child(2) { 
+    font-size:16px; padding:16px 0; 
+    border-top:1px solid #999;
+}
+#container .order .order1 > div:nth-child(3) a {
+    display: block; 
+    background: #d4e9e2; border-radius: 20px;
+    position:relative;
+    padding:30px 16px; font-size: 19px; 
+    line-height: 1.5em;
+    overflow: hidden;
+}
+#container .order .order1 > div:nth-child(3) a:first-child {
+     margin-bottom: 20px; }
+#container .order .order1 > div:nth-child(3) a strong{
+    display: block;
+}
+/* 인라인 성격(strong, span)인 애들은 블락으로 변경 <br>은 쓰지마 */
+#container .order .order1 > div:nth-child(3) a img { 
+    position:absolute; bottom: -10px;}
+#container .order .order1 > div:nth-child(3) a:first-child img {
+    width:63px; right:20px; 
+}
+#container .order .order1 > div:nth-child(3) a:last-child img { 
+    width:85px; right:-5px
+}
+#container .order .buy > div {
+    padding:24px; 
+}
+#container .order .buy > div h3 {
+    font-size: 19px;
+}
+#container .order .buy > div p {
+    font-size: 16px;
+    padding: 16px 0;
+}
+#container .order .buy > div a { 
+    display: inline-block; 
+    font-size: 16px;
+    color:#00754a;
+    border:1px solid #00754a;
+    border-radius:50px;
+    padding:6px 16px 8px;
+    font-weight: bold;   
+    transition:all 0.5s;
+}
+#container .order .buy > div a:hover{
+    background: rgb(235,244,241);  
+}
+
+/* company-info 구역 */
+#container .company-info {
+    padding: 48px 40px 32px;
+    background: #fff;
+}
+#container .company-info .depth1 { 
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;}
+#container .company-info .depth1 > li {
+    margin-bottom: 20px;
+ }
+#container .company-info .depth1 > li >a {
+    display: block;
+    font-size: 19px;
+    padding:20px 0;
+    position: relative;
+}
+/* css로 하면 웹폰트 아래 한 번으로 해결 가능 
+ position:absolute 주면 기준이 ::after 안붙은 곳에 relative 쓰기
+ 웹폰트의 위치 조정을 위해 top:50%주고 margin-top의 값은 부모요소 font-size 의 반값을 줌
+ */
+#container .company-info .depth1 > li >a::after {
+    content:'\f078';
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    position:absolute;
+    top:50%; right:15.5px;
+    margin-top:-9.5px;
+    transition:all 0.5s
+}
+#container .company-info .depth1 > li >a:hover::after { 
+    transform:rotate(180deg);
+}
+#container .company-info .depth1 > li >a::before { 
+    content:''; 
+    position:absolute;
+    top:50%; right:0;
+    /* top:50%; left:50%; right:50%; bottom: 50%; */
+    margin-top:-25px;
+    width:50px; height: 50px;
+    border-radius: 50%;
+    transition:all 0.5s;
+    transform-origin: center 
+    /* z-index: 2; */
+    
+}
+#container .company-info .depth1 > li >a:hover::before {
+    background: #ddd; transform:scale(1)
+    /* top: -4.75px;
+    left: -4.75px; 
+    right: -4.75px;  
+    bottom: -4.75px;  */
+}
+
+#container .company-info .depth2 { display:none }
+
+/* inline-block은 인라인요소의 글자만을 블락요소로 바꿔주고
+block은 인라인요소를 블락요소로 바꿔준다 */
+#container .company-info .depth2 > li { margin-bottom: 8px; }
+#container .company-info .depth2 > li > a {
+    display: inline-block;
+    padding: 8px 0;
+    font-size: 16px;
+    color:rgba(0,0,0,0.58)}
+
+/* footer 구역 */
+#container .footer { padding: 0 40px 100px}
+#container .footer .sns a {
+    display: inline-block;
+    width: 32px; height: 32px;
+    border-radius: 50%; 
+    background: #000; color: #fff;
+    font-size: 18px; text-align: center;
+    line-height: 30px; vertical-align: middle;
+    margin-bottom: 20px;
+    position:relative;
+    margin-top: 10px;
+}
+#container .footer .sns a::after {
+    content: '';
+    position:absolute;
+    /* width: 48px; height: 48px; */
+    border-radius: 50%;
+    background: #ddd;
+    top: 50%; left: 50%; right: 50%; bottom: 50%;
+    /* margin-top: -24px; margin-left: -24px; */
+    z-index: -1; 
+    transition:all 0.3s;
+}
+#container .footer .sns a:hover::after { 
+    background: #ddd;
+    top: -8px; left: -8px; right: -8px; bottom: -8px;
+}
+#container .footer .sns a:first-child { background: #fff;
+    width: 32px; height: 33px;
+    font-size: 32px; 
+    text-align: center;
+    color: #000;
+}
+#container .footer .sns a+a { 
+    margin-left:15px;
+}
+#container .footer .bmenu li a {
+    font-size: 16px;
+    padding: 8px 0;
+    display: inline-block;
+    margin-bottom: 4px;
+}
+/* c 저작권 의미하는 거 &copy;로 코딩 해야돼 html */
+#container .footer .copyright {
+    font-size: 14px; padding: 16px 0
+}
